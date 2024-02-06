@@ -13,13 +13,11 @@ jobs:
       uses: actions/checkout@v2
     - name: npmAudit scan
       run : |
-        ls
-        pwd
-        apt install -y tree
-        tree
+        curl -sL https://deb.nodesource.com/setup_20.x | sudo -E bash -
+        sudo apt-get install -y nodejs
     - name: Upload npmAudit report
       run : |
-        echo "Hii"
+        npm audit --json >> npm_result.json
       env:
         URL: ${{ secrets.URL}}
         KEY: ${{ secrets.KEY }}
