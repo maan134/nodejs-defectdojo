@@ -22,7 +22,7 @@ jobs:
       env:
         URL: ${{ secrets.URL}}
         KEY: ${{ secrets.KEY }}
-jobs:
+        
   npmAudit:
     runs-on: ubuntu-latest
     name: npmAudit library scanning
