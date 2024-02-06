@@ -29,9 +29,6 @@ jobs:
         -F file=@"results.sarif" \
         -F 'scan_type=SARIF' \
         -F 'tags=test'
-      env:
-        URL: ${{ secrets.URL}}
-        KEY: ${{ secrets.KEY }}
 
   npmAudit:
     runs-on: ubuntu-latest
@@ -41,7 +38,7 @@ jobs:
       uses: actions/checkout@v2
     - name: npmAudit scan
       run : |
-        curl -sL https://deb.nodesource.com/setup_20.x | sudo -E bash -
+        curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
         sudo apt-get install -y nodejs
     - name: Upload npmAudit report
       run : |
@@ -58,6 +55,3 @@ jobs:
         -F file=@"npm_result.json" \
         -F 'scan_type=NPM Audit Scan' \
         -F 'tags=test'
-      env:
-        URL: ${{ secrets.URL}}
-        KEY: ${{ secrets.KEY }}
