@@ -1,26 +1,20 @@
-name: njsscan
+name: npm audit
 on:
-  push:
-    branches: [ master ]
   pull_request:
-    branches: [ master ]
+  push:
+    branches: [master]
 jobs:
-  npmAudit:
+  scan:
+    permissions: write-all
+    name: npm audit
     runs-on: ubuntu-latest
-    name: npmAudit library scanning
     steps:
-    - name: Checkout the code
-      uses: actions/checkout@v2
-    - name: npmAudit scan
-      run : |
-        curl -sL https://deb.nodesource.com/setup_20.x | sudo -E bash -
-        sudo apt-get install -y nodejs
-        sudo apt-get install -y npm
-        npm audit --json >> npm_result.json
-    - name: Upload npmAudit report
-      run : |
-        cat npm_result.json
-      env:
-        URL: ${{ secrets.URL}}
-        KEY: ${{ secrets.KEY }}
-
+      - uses: actions/checkout@v3
+      - name: install dependencies
+        run: npm ci
+      - uses: oke-py/npm-audit-action@v2
+        with:
+          audit_level: moderate
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          issue_labels: vulnerability,test
+          dedupe_issues: true
