@@ -12,6 +12,7 @@ jobs:
     - name: Uploading the SAST results
       run: |
         pip install njsscan  
-        njsscan path $PWD --sarif --output nodejs-report.sarif
+        which njsscan
+        njsscan --version
                 
 
