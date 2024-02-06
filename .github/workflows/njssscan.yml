@@ -11,6 +11,6 @@ jobs:
       uses: actions/checkout@v2
     - name: Uploading the SAST results
       run: |
-        pip install nodejsscan  
-        nodejsscan path $PWD --sarif --output nodejs-report.sarif | true
+        pip install njsscan  
+        njsscan path $PWD --sarif --output nodejs-report.sarif | true
 
