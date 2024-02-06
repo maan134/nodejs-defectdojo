@@ -1,1 +1,1 @@
-Github Actions NodeJS Scan and publish results to DefectDojo 
+GitHub Actions NodeJS Scan and publish results to DefectDojo
