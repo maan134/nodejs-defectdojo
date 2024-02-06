@@ -4,7 +4,25 @@ on:
     branches: [ master ]
   pull_request:
     branches: [ master ]
-jobs:      
+jobs:
+  njsscan:
+    runs-on: ubuntu-latest
+    name: njsscan code scanning
+    steps:
+    - name: Checkout the code
+      uses: actions/checkout@v2
+    - name: nodejsscan scan
+      id: njsscan
+      uses: ajinabraham/njsscan-action@master
+      with:
+        args: '. --sarif --output results.sarif || true'
+    - name: Upload njsscan report
+      run : |
+        cat results.sarif
+      env:
+        URL: ${{ secrets.URL}}
+        KEY: ${{ secrets.KEY }}
+
   npmAudit:
     runs-on: ubuntu-latest
     name: npmAudit library scanning
@@ -25,4 +43,3 @@ jobs:
       env:
         URL: ${{ secrets.URL}}
         KEY: ${{ secrets.KEY }}
-
