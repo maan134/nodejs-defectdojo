@@ -19,3 +19,25 @@ jobs:
     - name: Upload njsscan report
       run : |
         cat results.sarif
+      env:
+        URL: ${{ secrets.URL}}
+        KEY: ${{ secrets.KEY }}
+  npmAudit:
+    runs-on: ubuntu-latest
+    name: npmAudit library scanning
+    steps:
+    - name: Checkout the code
+      uses: actions/checkout@v2
+    - name: npmAudit scan
+      run : |
+        curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
+        sudo apt-get install -y nodejs
+        sudo apt-get install -y npm
+        npm audit --json >> npm_result.json
+    - name: Upload npmAudit report
+      run : |
+        cat npm_result.json
+      env:
+        URL: ${{ secrets.URL}}
+        KEY: ${{ secrets.KEY }}
+
