@@ -1,18 +1,21 @@
-name: nodejs
-
+name: njsscan
 on:
   push:
-
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
 jobs:
-  checkout-repo:
+  njsscan:
     runs-on: ubuntu-latest
+    name: njsscan code scanning
     steps:
-    - name: Checkout repo
+    - name: Checkout the code
       uses: actions/checkout@v2
-    - name: Uploading the SAST results
-      run: |
-        pip install njsscan  
-        which njsscan
-        njsscan --version
-                
-
+    - name: nodejsscan scan
+      id: njsscan
+      uses: ajinabraham/njsscan-action@master
+      with:
+        args: '. --sarif --output results.sarif || true'
+    - name: Upload njsscan report
+      run : |
+        cat results.sarif
