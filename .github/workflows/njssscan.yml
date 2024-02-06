@@ -19,6 +19,7 @@ jobs:
         npm -v
     - name: Upload npmAudit report
       run : |
+        npm i --package-lock-only
         npm audit --json >> npm_result.json
       env:
         URL: ${{ secrets.URL}}
