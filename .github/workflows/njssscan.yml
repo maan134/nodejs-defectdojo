@@ -1,15 +1,16 @@
-name: njsscan
+name: nodejs
+
 on:
   push:
-  
+
 jobs:
-  njsscan:
+  checkout-repo:
     runs-on: ubuntu-latest
-    name: njsscan check
     steps:
-    - uses: actions/checkout@v1
-    - name: njsscan
-      id: njsscan
-      uses: ajinabraham/njsscan-action@v5
-      with:
-        args: '.'
+    - name: Checkout repo
+      uses: actions/checkout@v2
+    - name: Uploading the SAST results
+      run: |
+        pip install nodejsscan  
+        nodejsscan path $PWD --sarif --output nodejs-report.sarif | true
+
