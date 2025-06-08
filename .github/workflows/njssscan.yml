@@ -20,11 +20,11 @@ jobs:
       run : |
         cat results.sarif
         curl -X 'POST' \
-        'http://<your-instance-server-ip>:8080/api/v2/reimport-scan/' \
+        'http://35.219.171.63:8080/api/v2/reimport-scan/' \
         -H 'accept: application/json' \
-        -H 'Authorization: Token <your-instance-api-token>' \
+        -H 'Authorization: Token 931fc7147fb2bc56b6170879a827dd9708d8f464' \
         -H 'Content-Type: multipart/form-data' \
-        -F 'test=<your-instance-test-id>' \
+        -F 'test=1' \
         -F '[email protected];type=application/json' \
         -F file=@"results.sarif" \
         -F 'scan_type=SARIF' \
@@ -47,11 +47,11 @@ jobs:
         npm audit --json >> npm_result.json | true
         cat npm_result.json
         curl -X 'POST' \
-        'http://<your-instance-server-ip>:8080/api/v2/reimport-scan/' \
+        'http://35.219.171.63:8080/api/v2/reimport-scan/' \
         -H 'accept: application/json' \
-        -H 'Authorization: Token <your-instance-api-token>' \
+        -H 'Authorization: Token 931fc7147fb2bc56b6170879a827dd9708d8f464' \
         -H 'Content-Type: multipart/form-data' \
-        -F 'test=<your-instance-test-id>' \
+        -F 'test=2' \
         -F '[email protected];type=application/json' \
         -F file=@"npm_result.json" \
         -F 'scan_type=NPM Audit Scan' \
