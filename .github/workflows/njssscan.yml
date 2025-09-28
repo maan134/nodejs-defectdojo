@@ -1,4 +1,4 @@
-name: njsscan
+name: njsscan refresh
 on:
   push:
     branches: [ master ]
